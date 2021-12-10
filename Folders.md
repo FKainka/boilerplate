@@ -151,6 +151,10 @@ Validierung durch: <fieldset addruleprefix="FooNamespace\Component\Foos\ Adminis
 ### administrator/components/ com_foos/ src/Controller/FoosController.php
 ? Veröffentlichung, Status Controller?
 
+### administrator/components/ com_foos/ forms/filter_foos.xml
+Formular zum Filtern von Listen
+
+
 ## Media
 
 ### media/com_foos/joomla.asset.json
@@ -201,7 +205,7 @@ $this->get('Msg') statt getMsg()
 
 
 
-## Sprachdateien
+## Mehrsprachigkeit
 
 ### administrator/components/ com_foos/language/en-GB/com_foos.ini
 #### administrator/components/ com_foos/ language/de-DE/com_foos.ini
@@ -213,10 +217,26 @@ Die sys.ini wird in erster Linie bei der Installation und für die Anzeige der M
  die deutsche Sprachversion für den Administrationsbereich für Menüs und Installation
 (administrator/components/ com_foos/ language/en-GB/com_foos.sys.ini)
 
-
 ### components/com_foos/language/en-GB/com_foos.ini
 #### components/com_foos/language/de-DE/com_foos.ini
 Im Frontend gibt es lediglich die .ini - also keine sys.ini
+
+### administrator/components/ com_foos/src/Helper/AssociationsHelper.php
+Backend. die Schnittstelle zur Komponente Sprachverknüpfungen com_associations. In dieser Helper-Datei stellen wir die Angaben bereit, die für unsere Komponente spezifisch sind, so dass die Joomla eigenen Routinen sich in unserer Komponente zurecht finden.
+
+### components/com_foos/ src/Helper/AssociationHelper.php
+Frontent. die Schnittstelle zur Komponente Sprachverknüpfungen com_associations. In ihr konfigurieren wir die Angaben, die für unsere Komponente spezifisch sind.
+
+### components/com_foos/ src/Helper/RouteHelper.php
+Wir erzeugen die Klasse RouteHelper, damit die Links korrekt zusammengesetzt werden, die wir in diesem Kapitel erstellen. Innerhalb des Links gibt es eine weitere Information als Parameter: die Sprache.
+
+### administrator/components/ com_foos/ tmpl/foo/edit_associations.php
+ Editieren der Sprachverknüpfungen. Standadtemplate : /layouts/joomla/ edit/associations.php. 
+
+
+
+
+
 
 ## Datenbank
 
