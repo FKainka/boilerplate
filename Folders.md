@@ -67,7 +67,36 @@ Aktuell bei Nr20
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-# Dateien und Ordner
+# Dateien und Ordner: Modul
+
+### modules/mod_foo/ language/en-GB/en-GB.mod_foo.ini
+#### modules/mod_foo/ language/en-GB/en-GB.mod_foo.sys.ini
+Sprach-Dateien
+
+### modules/mod_foo/ mod_foo.php
+ ist der Haupteinstiegspunkt ins Modul. Die Datei führt die Initialisierungsroutinen aus, ruft Hilfsroutinen auf, um alle erforderlichen Daten zu erfassen, und ruft das Template auf, in dem die Modulausgabe angezeigt wird.
+
+### modules/mod_foo/ mod_foo.xml
+ definiert die Dateien, die von der Installationsroutine kopiert werden und gibt Konfigurationsparameter für das Modul an. Du kennst dies bereits von den vorher erstellten Erweiterungen.
+
+### modules/mod_foo/tmpl/default.php
+ist das Template. Diese Datei nimmt die von mod_foo.php gesammelten Daten und generiert den HTML-Code, der auf der Seite angezeigt wird. echo '[PROJECT_NAME]'; sorgt dafür, dass der Name des Projekts im Frontend an der Position angezeigt wird, an der das Modul veröffentlicht ist.  In der Templatedatei ist es möglich, alle in mod_foo.php definierten Variablen zu verwenden.
+
+### modules/mod_foo/ Helper/FooHelper.php
+Helfer Datei zum geneiren von Inhalten
+
+### modules/mod_foo/ script.php
+Mit der Installationsskriptdatei rufst du Code auf
+
+* wenn deine Komponente installiert wird,
+* bevor deine Komponente installiert wird,
+* wenn deine Komponente deinstalliert wird,
+* bevor deine Komponente deinstalliert wird,
+* oder wenn deine Komponente aktualisiert wird.
+
+
+
+# Dateien und Ordner: Componente
 
 ## Backend 1 
 ### administrator/components/ com_foos/ foos.xml
@@ -146,13 +175,22 @@ alle möglichen Berechtigungen in einer XML-Datei. Jede Komponente kann individu
 
 ### administrator/components/ com_foos/ src/Rule/LetterRule.php
 Validierung von Eingaben (Serverseitig): iese Prüfung implementieren wir in der Datei LetterRule.php. Z.B durch reguläre Asudrücke aber auch durch Funktionen
-Validierung durch: <fieldset addruleprefix="FooNamespace\Component\Foos\ Administrator\Rule"> und validate="Letter".
+Validierung durch: \<fieldset addruleprefix="FooNamespace\Component\Foos\ Administrator\Rule"\> und validate="Letter".
 
 ### administrator/components/ com_foos/ src/Controller/FoosController.php
 ? Veröffentlichung, Status Controller?
 
 ### administrator/components/ com_foos/ forms/filter_foos.xml
 Formular zum Filtern von Listen
+
+### administrator/components/ com_foos/ tmpl/foos/default_batch_body.php
+Batch-Verarbeitung
+
+### administrator/components/ com_foos/ tmpl/foos/default_batch_footer.php
+Batch-Verarbeitung Footer
+
+### administrator/components/com_foos/ presets/foos.xml
+was standardmäßig auf dem Dashboard angezeigt wird.
 
 
 ## Media
@@ -201,9 +239,23 @@ $this->get('Msg') statt getMsg()
 ### components/com_foos/ tmpl/foo/default.php
 Über das Template geben wir die Daten aus. Hier wird später alles in HTML-Tags verpackt.
 
+### components/com_foos/ src/Model/FeaturedModel.php
+Featured Artikel
 
+### components/com_foos/ src/View/Featured/HtmlView.php
+Featured ansicht
 
+### components/com_foos/ tmpl/featured/default.php
+Featured Template
 
+### components/com_foos/ tmpl/featured/default.xml
+Featured Anzeige über Frontend
+
+### components/com_foos/ tmpl/featured/default_items.php
+Featured Default
+
+### components/com_foos/ src/Service/Router.php
+erledigt die eigentliche Arbeit und wandelt die URLs in suchmaschinenfreundliche Versionen.
 
 ## Mehrsprachigkeit
 
@@ -252,6 +304,25 @@ ein Model für den Administrationsbereich. Holt Daten aus der Datenebank
 ### administrator/components/ com_foos/ sql/updates/mysql/VERSIONSNUMMER.sql
 z.B.: administrator/components/ com_foos/ sql/updates/mysql/10.0.0.sql
 
+## Webservice API
+Hier: Eigene AIP (kann von extern angesteuert werden). Mit Basic AUTH.
+
+### api/components/com_foos/src/Controller/FooController.php
+Erstelle den Controller FooController der von ApiController erbt. In der Klasse ApiController ist alles Notwendige implementiert. 
+
+### api/components/com_foos/src/View/Foos/JsonapiView.php
+Erstelle die Schnittstelle JsonapiView die von BaseApiView erbt. Greife wieder auf fertigen Joomla Code zu. Überschreibe die folgenden Felder für deine Komponente:
+
+### plugins/webservices/foos/foos.php
+In der Plugin-Datei erstellen wir die Klasse PlgWebservicesFoos und registrieren in der onBeforeApiRoute-Methode alle Routen, die wir für den Webservice benötigen.
+
+
+### plugins/webservices/foos/foos.xml
+Plugin installations Datei
+
+### plugins/webservices/foos/language/en-GB/plgwebservicesfoos.ini
+#### plugins/webservices/foos/language/en-GB/plgwebservicesfoos.sys.ini
+Sprachdateien
 
 # Sonstiges
 
